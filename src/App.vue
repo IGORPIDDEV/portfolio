@@ -1,23 +1,19 @@
 <template>
-  <v-app>
-    <v-app-bar>
-      <v-toolbar-title>Portfolio</v-toolbar-title>
-    </v-app-bar>
-    <v-main>
-      <v-container>
-        <v-layout>
-          <router-view></router-view>
-        </v-layout>
-      </v-container>
-    </v-main>
-    <v-footer>
-      <span>&copy; 2023 My Portfolio</span>
-    </v-footer>
-  </v-app>
+  <main-layout>
+    <router-view />
+  </main-layout>
 </template>
 
-<script setup lang="ts">
-import { RouterView } from 'vue-router'
-</script>
+<script lang="ts">
+import { defineComponent } from 'vue';
+import { RouterView } from 'vue-router';
+import MainLayout from '@/layouts/MainLayout.vue';
 
-<style scoped></style>
+export default defineComponent({
+  name: 'App',
+  components: {
+    MainLayout,
+    RouterView
+  }
+});
+</script>
