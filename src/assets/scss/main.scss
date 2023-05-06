@@ -9,6 +9,18 @@
 
 // Layout
 @import 'layout/header';
+@import 'layout/footer';
 
 // Pages
 @import 'pages/home';
+
+:root {
+  --p-black: $pblack;
+  --p-blue: $pblue;
+  --p-white: $pwhite;
+  --p-dark: $pdark;
+}
+
+:export {
+  colorD: #fff;
+}

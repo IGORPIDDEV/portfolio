@@ -5,9 +5,9 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
-import { RouterView } from 'vue-router';
-import MainLayout from '@/layouts/MainLayout.vue';
+import { defineComponent } from 'vue'
+import { RouterView } from 'vue-router'
+import MainLayout from '@/layouts/MainLayout.vue'
 
 export default defineComponent({
   name: 'App',
@@ -15,5 +15,5 @@ export default defineComponent({
     MainLayout,
     RouterView
   }
-});
+})
 </script>
