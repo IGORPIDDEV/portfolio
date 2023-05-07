@@ -15,14 +15,24 @@
           :key="index"
           class="header__item pa-4 d-flex align-center"
         >
-          <a
-            class="header__link font-weight-bold"
-            :class="{ 'text-secondary': link.title === activeLink }"
-            @click="goTo(link.title)"
-          >
-            <v-icon class="header__icon">{{ link.icon }}</v-icon>
-            {{ link.title }}
-          </a>
+          <v-hover v-slot="{ isHovering, props }">
+            <div class="d-flex flex-column">
+              <a
+                class="header__link d-flex font-weight-bold"
+                :class="{ 'text-secondary animate-hover': link.title === activeLink || isHovering }"
+                @click="goTo(link.title)"
+                v-bind="props"
+              >
+                <v-icon class="header__link-icon">{{ link.icon }}</v-icon>
+                <div class="header__link-text">{{ link.title }}</div>
+              </a>
+              <div class="header__item-border relative">
+                <v-expand-x-transition>
+                  <div v-if="isHovering" class="header__item-border-animation"></div>
+                </v-expand-x-transition>
+              </div>
+            </div>
+          </v-hover>
         </li>
       </ul>
     </v-toolbar-items>
@@ -119,5 +129,13 @@ export default defineComponent({
 }
 .header__link {
   cursor: pointer;
+  position: relative;
+  gap: 5px;
+}
+.header__item-border-animation {
+  position: absolute;
+  height: 5px;
+  width: 100%;
+  border-bottom: 3px solid $pdark;
 }
 </style>
