@@ -38,36 +38,43 @@
     </v-toolbar-items>
     <v-spacer />
     <v-toolbar-items class="header__nav d-none d-md-flex">
-      <v-btn icon v-for="(link, index) in socialLinks" :key="index">
-        <v-icon>{{ link.icon }}</v-icon>
-      </v-btn>
+      <ul class="header__list d-flex">
+        <li
+          v-for="(link, index) in socialLinks"
+          :key="index"
+          class="header__item pa-4 d-flex align-center"
+        >
+          <v-hover v-slot="{ isHovering, props }">
+            <div class="d-flex flex-column">
+              <a
+                class="header__link d-flex font-weight-bold"
+                :class="{ 'text-secondary animate-hover': link.title === activeLink || isHovering }"
+                @click="goTo(link.title)"
+                v-bind="props"
+              >
+                <v-icon class="header__link-icon">{{ link.icon }}</v-icon>
+              </a>
+            </div>
+          </v-hover>
+        </li>
+      </ul>
     </v-toolbar-items>
   </v-app-bar>
-  <v-navigation-drawer v-model="mobileDrawer" location="top" temporary>
-    <v-list>
-      <v-list-item
-        v-for="(link, index) in links"
-        :key="index"
-        :value="link.src"
-        active-color="primary"
-        @click="goTo(link.title, true)"
-      >
-        <template v-slot:prepend>
-          <v-icon class="header__icon" :icon="link.icon"></v-icon>
-        </template>
-
-        <v-list-item-title class="header__item-title">{{ link.title }}</v-list-item-title>
-      </v-list-item>
-    </v-list>
+  <v-navigation-drawer v-model="mobileDrawer" location="left" temporary>
+    <list-menu :links="links" :goTo="goTo" />
+    <v-divider class="my-2" />
+    <list-menu :links="socialLinks" :goTo="goTo" />
   </v-navigation-drawer>
 </template>
 
 <script lang="ts">
 import { defineComponent, reactive, ref } from 'vue'
 import type LinkInterface from '@/types/Link'
+import listMenu from './listMenu.vue'
 
 export default defineComponent({
   name: 'AppHeader',
+  components: { listMenu },
   setup() {
     const mobileDrawer = ref<boolean>(false)
     const activeLink = ref<string>('')
@@ -76,22 +83,26 @@ export default defineComponent({
       {
         title: 'About',
         src: 'about',
-        icon: 'mdi-chat-question-outline'
+        icon: 'mdi-chat-question-outline',
+        type: 'default'
       },
       {
         title: 'Skills',
         src: 'skills',
-        icon: 'mdi-application-braces-outline'
+        icon: 'mdi-application-braces-outline',
+        type: 'default'
       },
       {
         title: 'Projects',
         src: 'projects',
-        icon: 'mdi-devices'
+        icon: 'mdi-devices',
+        type: 'default'
       },
       {
         title: 'Contacts',
         src: 'contacts',
-        icon: 'mdi-contacts'
+        icon: 'mdi-contacts',
+        type: 'default'
       }
     ])
 
@@ -99,12 +110,14 @@ export default defineComponent({
       {
         title: 'Linkedin',
         src: 'linkedin',
-        icon: 'mdi-linkedin'
+        icon: 'mdi-linkedin',
+        type: 'social'
       },
       {
         title: 'Gmail',
         src: 'gmail',
-        icon: 'mdi-gmail'
+        icon: 'mdi-gmail',
+        type: 'social'
       }
     ])
 

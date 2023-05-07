@@ -12,7 +12,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import AppHeader from '@/components/common/Header.vue'
+import AppHeader from '@/components/common/header/Header.vue'
 import AppFooter from '@/components/common/Footer.vue'
 export default defineComponent({
   name: 'MainLayout',
