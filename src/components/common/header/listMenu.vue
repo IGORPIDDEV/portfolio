@@ -32,6 +32,9 @@ export default defineComponent({
     goTo: {
       type: Function as PropType<(title: string, mobile: boolean) => void>,
       required: true
+    },
+    activeLink: {
+      type: String
     }
   },
   setup() {
