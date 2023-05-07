@@ -6,8 +6,10 @@
           <div class="d-flex flex-column">
             <a
               class="header__link d-flex font-weight-bold"
-              :class="{ 'text-secondary animate-hover': link.title === activeLink || isHovering }"
-              @click="goTo(link.title, false)"
+              :class="{
+                'text-secondary animate-hover': link.title === store.activeLink || isHovering
+              }"
+              @click="store.goTo(link.title, false)"
               v-bind="props"
             >
               <v-icon class="header__link-icon">{{ link.icon }}</v-icon>
@@ -28,6 +30,7 @@
 <script lang="ts">
 import { defineComponent, type PropType, ref } from 'vue'
 import type LinkInterface from '@/types/Link'
+import { useNavigationStore } from '@/stores/navigation'
 
 export default defineComponent({
   name: 'listMenu',
@@ -35,13 +38,12 @@ export default defineComponent({
     links: {
       type: Array as PropType<LinkInterface[]>,
       required: true
-    },
-    goTo: {
-      type: Function as PropType<(title: string, mobile: boolean) => void>,
-      required: true
-    },
-    activeLink: {
-      type: String
+    }
+  },
+  setup() {
+    const store = useNavigationStore()
+    return {
+      store
     }
   }
 })

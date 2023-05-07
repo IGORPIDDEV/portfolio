@@ -5,7 +5,7 @@
       :key="index"
       :value="link.src"
       :active-color="getActiveColor(link.type)"
-      @click="goTo(link.title, true)"
+      @click="store.goTo(link.title, true)"
     >
       <template v-slot:prepend>
         <v-icon class="header__icon">{{ link.icon }}</v-icon>
@@ -21,6 +21,7 @@
 <script lang="ts">
 import { defineComponent, type PropType } from 'vue'
 import type LinkInterface from '@/types/Link'
+import { useNavigationStore } from '@/stores/navigation'
 
 export default defineComponent({
   name: 'listMenu',
@@ -28,20 +29,15 @@ export default defineComponent({
     links: {
       type: Array as PropType<LinkInterface[]>,
       required: true
-    },
-    goTo: {
-      type: Function as PropType<(title: string, mobile: boolean) => void>,
-      required: true
-    },
-    activeLink: {
-      type: String
     }
   },
   setup() {
+    const store = useNavigationStore()
     function getActiveColor(type: string): string | undefined {
       return type !== 'social' ? 'primary' : undefined
     }
     return {
+      store,
       getActiveColor
     }
   }
