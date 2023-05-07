@@ -3,6 +3,7 @@
 
 // Base
 @import 'base/variables';
+@import 'base/reset';
 
 // Components
 @import 'components/buttons';
@@ -19,8 +20,4 @@
   --p-blue: $pblue;
   --p-white: $pwhite;
   --p-dark: $pdark;
-}
-
-:export {
-  colorD: #fff;
 }

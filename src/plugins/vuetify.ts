@@ -2,6 +2,7 @@ import { createVuetify, type ThemeDefinition } from 'vuetify'
 import * as components from 'vuetify/components'
 import * as directives from 'vuetify/directives'
 import defaultColors from '@/assets/scss/base/_colors.module.scss'
+import '@mdi/font/css/materialdesignicons.css'
 
 const light: ThemeDefinition = {
   dark: false,
