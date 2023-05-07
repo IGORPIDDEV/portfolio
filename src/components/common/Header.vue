@@ -1,11 +1,13 @@
 <template>
   <v-app-bar class="header" height="80" color="primary" flat>
-    <v-app-bar-nav-icon
-      @click.stop="drawer = !drawer"
-      icon="mdi-menu-open"
-      class="header__nav-icon d-flex d-md-none"
-    />
-    <v-app-bar-title class="header__title"> My Portfolio </v-app-bar-title>
+    <template v-slot:append>
+      <v-app-bar-nav-icon
+        class="header__nav-icon d-flex d-md-none"
+        icon="mdi-menu-open"
+        @click.stop="mobileDrawer = !mobileDrawer"
+      />
+    </template>
+    <v-app-bar-title class="header__title font-weight-bold"> Igor P. </v-app-bar-title>
     <v-toolbar-items class="header__nav d-none d-md-flex">
       <ul class="header__list d-flex">
         <li
@@ -24,8 +26,14 @@
         </li>
       </ul>
     </v-toolbar-items>
+    <v-spacer />
+    <v-toolbar-items class="header__nav d-none d-md-flex">
+      <v-btn icon v-for="(link, index) in socialLinks" :key="index">
+        <v-icon>{{ link.icon }}</v-icon>
+      </v-btn>
+    </v-toolbar-items>
   </v-app-bar>
-  <v-navigation-drawer v-model="drawer" location="top" temporary>
+  <v-navigation-drawer v-model="mobileDrawer" location="top" temporary>
     <v-list>
       <v-list-item
         v-for="(link, index) in links"
@@ -51,7 +59,7 @@ import type LinkInterface from '@/types/Link'
 export default defineComponent({
   name: 'AppHeader',
   setup() {
-    const drawer = ref<boolean>(false)
+    const mobileDrawer = ref<boolean>(false)
     const activeLink = ref<string>('')
 
     const links = reactive<LinkInterface[]>([
@@ -77,14 +85,28 @@ export default defineComponent({
       }
     ])
 
+    const socialLinks = reactive<LinkInterface[]>([
+      {
+        title: 'Linkedin',
+        src: 'linkedin',
+        icon: 'mdi-linkedin'
+      },
+      {
+        title: 'Gmail',
+        src: 'gmail',
+        icon: 'mdi-gmail'
+      }
+    ])
+
     function goTo(title: string, mobile: boolean = false) {
       activeLink.value = title
-      if (mobile) drawer.value = false
+      if (mobile) mobileDrawer.value = false
     }
 
     return {
       links,
-      drawer,
+      socialLinks,
+      mobileDrawer,
       activeLink,
       goTo
     }
