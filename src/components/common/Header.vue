@@ -13,7 +13,11 @@
           :key="index"
           class="header__item pa-4 d-flex align-center"
         >
-          <a class="header__link font-weight-bold" :class="{ 'text-secondary': link.active }">
+          <a
+            class="header__link font-weight-bold"
+            :class="{ 'text-secondary': link.title === activeLink }"
+            @click="goTo(link.title)"
+          >
             <v-icon class="header__icon">{{ link.icon }}</v-icon>
             {{ link.title }}
           </a>
@@ -28,6 +32,7 @@
         :key="index"
         :value="link.src"
         active-color="primary"
+        @click="goTo(link.title, true)"
       >
         <template v-slot:prepend>
           <v-icon class="header__icon" :icon="link.icon"></v-icon>
@@ -41,49 +46,47 @@
 
 <script lang="ts">
 import { defineComponent, reactive, ref } from 'vue'
+import type LinkInterface from '@/types/Link'
 
 export default defineComponent({
   name: 'AppHeader',
   setup() {
-    interface Link {
-      title: string
-      src: string
-      icon: string
-      active: boolean
-    }
-
     const drawer = ref<boolean>(false)
+    const activeLink = ref<string>('')
 
-    const links = reactive<Link[]>([
+    const links = reactive<LinkInterface[]>([
       {
         title: 'About',
         src: 'about',
-        icon: 'mdi-chat-question-outline',
-        active: true
+        icon: 'mdi-chat-question-outline'
       },
       {
         title: 'Skills',
         src: 'skills',
-        icon: 'mdi-application-braces-outline',
-        active: false
+        icon: 'mdi-application-braces-outline'
       },
       {
         title: 'Projects',
         src: 'projects',
-        icon: 'mdi-devices',
-        active: false
+        icon: 'mdi-devices'
       },
       {
         title: 'Contacts',
         src: 'contacts',
-        icon: 'mdi-contacts',
-        active: false
+        icon: 'mdi-contacts'
       }
     ])
 
+    function goTo(title: string, mobile: boolean = false) {
+      activeLink.value = title
+      if (mobile) drawer.value = false
+    }
+
     return {
       links,
-      drawer
+      drawer,
+      activeLink,
+      goTo
     }
   }
 })
