@@ -2,9 +2,7 @@
   <v-app>
     <app-header />
     <v-main>
-      <v-container>
-        <slot />
-      </v-container>
+      <slot />
     </v-main>
     <app-footer />
   </v-app>
