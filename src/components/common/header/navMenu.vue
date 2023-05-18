@@ -1,10 +1,10 @@
 <template>
   <v-toolbar-items class="header__nav d-none d-md-flex align-center">
-    <v-tabs color="secondary" background-color="white" height="40">
+    <v-tabs class="header__nav__tabs" color="secondary" background-color="white" height="40">
       <v-tab
         v-for="(link, index) in store.links"
         :key="index"
-        class="px-1 mx-3 no-hover-bg"
+        class="header__nav__tab px-1 mx-3"
         min-width="0"
         :ripple="false"
         :active="link.title === store.activeLink"
@@ -33,22 +33,11 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
-.header__list {
-  list-style: none;
-}
-.header__link {
-  cursor: pointer;
-  position: relative;
-  gap: 5px;
-}
-.header__item-border-animation {
-  position: absolute;
-  height: 5px;
-  width: 100%;
-  border-bottom: 3px solid $pdark;
-}
-
-.v-tab {
+.header__nav__tab {
   text-transform: none !important;
+  font-size: 16px !important;
+}
+.header__nav__tab > .v-btn__overlay {
+  opacity: 0 !important;
 }
 </style>
