@@ -2,33 +2,27 @@
   <v-toolbar-items class="header__nav d-none d-md-flex align-center">
     <v-tabs color="secondary" background-color="white" height="40">
       <v-tab
-        v-for="(item, index) in links"
+        v-for="(link, index) in store.links"
         :key="index"
         class="px-1 mx-3 no-hover-bg"
         min-width="0"
         :ripple="false"
+        :active="link.title === store.activeLink"
         rounded="20px"
-        @click="store.goTo(item.title, false)"
+        @click="store.goTo(link.title, false)"
       >
-        {{ item.title }}
+        {{ link.title }}
       </v-tab>
     </v-tabs>
   </v-toolbar-items>
 </template>
 
 <script lang="ts">
-import { defineComponent, type PropType, ref } from 'vue'
-import type LinkInterface from '@/types/Link'
+import { defineComponent } from 'vue'
 import { useNavigationStore } from '@/stores/navigation'
 
 export default defineComponent({
   name: 'listMenu',
-  props: {
-    links: {
-      type: Array as PropType<LinkInterface[]>,
-      required: true
-    }
-  },
   setup() {
     const store = useNavigationStore()
     return {

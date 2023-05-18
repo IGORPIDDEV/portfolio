@@ -17,6 +17,9 @@ const light: ThemeDefinition = {
 export default createVuetify({
   components,
   directives,
+  display: {
+    mobileBreakpoint: 'md'
+  },
   theme: {
     defaultTheme: 'light',
     themes: {

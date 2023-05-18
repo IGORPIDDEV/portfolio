@@ -4,34 +4,51 @@
       <v-app-bar-nav-icon
         class="header__nav-icon d-flex d-md-none"
         icon="mdi-menu-open"
-        @click.stop="store.mobileDrawer = !store.mobileDrawer"
+        @click.stop="toggleMobileDrawer()"
       />
     </template>
     <v-app-bar-title class="header__title font-weight-bold"> Igor P. </v-app-bar-title>
-    <nav-menu :links="store.links" />
+    <nav-menu />
     <v-spacer />
-    <nav-menu :links="store.socialLinks" />
+    <social-links v-if="!isMobile" />
   </v-app-bar>
   <v-navigation-drawer v-model="store.mobileDrawer" location="left" temporary>
-    <list-menu :links="store.links" />
+    <list-menu />
     <v-divider class="my-2" />
-    <list-menu :links="store.socialLinks" />
+    <social-links v-if="isMobile" />
   </v-navigation-drawer>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, computed, watch } from 'vue'
+import { useDisplay } from 'vuetify'
 import { useNavigationStore } from '@/stores/navigation'
 import listMenu from './listMenu.vue'
 import navMenu from './navMenu.vue'
+import socialLinks from './socialLinks.vue'
 
 export default defineComponent({
   name: 'AppHeader',
-  components: { listMenu, navMenu },
+  components: { listMenu, navMenu, socialLinks },
   setup() {
     const store = useNavigationStore()
+    const { mobile } = useDisplay()
+    const isMobile = computed(() => {
+      return mobile.value
+    })
+    const toggleMobileDrawer = () => {
+      store.mobileDrawer = !store.mobileDrawer
+    }
+    watch(
+      () => mobile.value,
+      (mobileScreen) => {
+        if (!mobileScreen) store.mobileDrawer = false
+      }
+    )
     return {
-      store
+      store,
+      isMobile,
+      toggleMobileDrawer
     }
   }
 })

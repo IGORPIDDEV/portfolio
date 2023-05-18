@@ -1,10 +1,11 @@
 <template>
   <v-list>
     <v-list-item
-      v-for="(link, index) in links"
+      v-for="(link, index) in store.links"
       :key="index"
       :value="link.src"
-      :active-color="getActiveColor(link.type)"
+      active-color="primary"
+      :active="link.title === store.activeLink"
       @click="store.goTo(link.title, true)"
     >
       <template v-slot:prepend>
@@ -19,26 +20,15 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, type PropType } from 'vue'
-import type LinkInterface from '@/types/Link'
+import { defineComponent } from 'vue'
 import { useNavigationStore } from '@/stores/navigation'
 
 export default defineComponent({
   name: 'listMenu',
-  props: {
-    links: {
-      type: Array as PropType<LinkInterface[]>,
-      required: true
-    }
-  },
   setup() {
     const store = useNavigationStore()
-    function getActiveColor(type: string): string | undefined {
-      return type !== 'social' ? 'primary' : undefined
-    }
     return {
-      store,
-      getActiveColor
+      store
     }
   }
 })
