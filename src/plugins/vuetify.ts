@@ -7,10 +7,10 @@ import '@mdi/font/css/materialdesignicons.css'
 const light: ThemeDefinition = {
   dark: false,
   colors: {
-    primary: defaultColors.pblue,
-    secondary: defaultColors.pdark,
-    'secondary-darken-1': defaultColors.pblack,
-    default: defaultColors.pwhite
+    primary: defaultColors.pp1,
+    secondary: defaultColors.pp2,
+    'secondary-darken-1': defaultColors.pp2,
+    default: defaultColors.pp3
   }
 }
 

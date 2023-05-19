@@ -1,4 +1,5 @@
 <template>
+  <Hero />
   <v-container class="pa-0">
     <h1>Home page</h1>
     <p>
@@ -48,18 +49,13 @@
   </v-container>
 </template>
 
-<script>
-export default {
-  data() {
-    return {
-      activeTab: null,
-      menuItems: [
-        { title: 'Home', route: '/home' },
-        { title: 'About', route: '/about' },
-        { title: 'Services', route: '/services' },
-        { title: 'Contact', route: '/contact' }
-      ]
-    }
+<script lang="ts">
+import { defineComponent } from 'vue'
+import Hero from '@/components/hero/Hero.vue'
+export default defineComponent({
+  name: 'HomeView',
+  components: {
+    Hero
   }
-}
+})
 </script>
