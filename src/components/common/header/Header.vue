@@ -7,7 +7,7 @@
         @click.stop="toggleMobileDrawer()"
       />
     </template>
-    <v-app-bar-title class="header__title font-weight-bold"> Igor P. </v-app-bar-title>
+    <v-app-bar-title class="header__title text-no-wrap font-weight-bold"> Igor P</v-app-bar-title>
     <nav-menu />
     <v-spacer />
     <social-links v-if="!isMobile" />
@@ -53,4 +53,8 @@ export default defineComponent({
   }
 })
 </script>
-<style lang="scss"></style>
+<style lang="scss">
+.header__title {
+  width: 100px;
+}
+</style>

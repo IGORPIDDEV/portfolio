@@ -40,6 +40,12 @@ export const useNavigationStore = defineStore('navigation', () => {
       type: 'social'
     },
     {
+      title: 'GitHub',
+      src: 'github',
+      icon: 'mdi-github',
+      type: 'social'
+    },
+    {
       title: 'Gmail',
       src: 'gmail',
       icon: 'mdi-gmail',

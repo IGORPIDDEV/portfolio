@@ -9,7 +9,7 @@ const light: ThemeDefinition = {
   colors: {
     primary: defaultColors.portfolio_primary,
     secondary: defaultColors.portfolio_secondary,
-    default: defaultColors.portfolio_light
+    default: defaultColors.portfolio_default
   }
 }
 
