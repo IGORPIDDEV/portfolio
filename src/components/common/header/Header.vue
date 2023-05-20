@@ -55,6 +55,6 @@ export default defineComponent({
 </script>
 <style lang="scss">
 .header__title {
-  width: 100px;
+  max-width: 80px;
 }
 </style>
