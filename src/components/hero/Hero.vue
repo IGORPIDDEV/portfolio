@@ -4,27 +4,28 @@
       <v-container>
         <v-row>
           <v-col cols="12" md="8" lg="6" class="text-center text-md-left px-0">
-            <h1 class="hero__greeting text-h4 text-sm-h3 mb-4">Hi, my name is Igor</h1>
-            <p class="hero__description text-h6 mb-4">
-              <v-chip class="ma-2 hero__chip" color="default" label>
-                <v-icon start icon="mdi-vuejs"></v-icon>
+            <h1 class="hero__greeting text-h4 text-sm-h3 mb-4">Hello, i'm Igor</h1>
+            <p class="hero__description text-h6 mb-4 d-flex">
+              <v-chip class="hero__chip" color="default" label>
+                <v-icon class="hero__chip__icon" start icon="mdi-vuejs"></v-icon>
                 Vue.js
               </v-chip>
-              <v-chip class="ma-2 hero__chip" color="default" label>
-                <v-icon start icon="mdi-nodejs"></v-icon>
+              <v-chip class="hero__chip" color="default" label>
+                <v-icon class="hero__chip__icon" start icon="mdi-nodejs"></v-icon>
                 Node.js
               </v-chip>
-              <v-chip class="ma-2 hero__chip" color="default" label>
-                <v-icon start icon="mdi-laravel"></v-icon>
+              <v-chip class="hero__chip" color="default" label>
+                <v-icon class="hero__chip__icon" start icon="mdi-laravel"></v-icon>
                 Laravel
               </v-chip>
             </p>
             <p class="mb-6 text-sm-h6">
-              Experienced
-              <span class="text-secondary font-weight-bold">Full Stack Web Developer</span> with 4+
-              years of expertise in creating responsive web applications using various programming
-              languages and frameworks. Proficient in database management, server-side scripting,
-              and front- end development.
+              I'm passionate
+              <span class="text-secondary font-weight-bold">Full Stack Web Developer</span>. With a
+              strong foundation in both front-end and back-end technologies, I specialize in
+              creating dynamic and responsive web applications. My goal is to deliver high-quality
+              solutions that provide seamless user experiences. Let's build something amazing
+              together!
             </p>
             <v-container class="pa-0">
               <v-row>
@@ -99,23 +100,29 @@ export default defineComponent({
   width: 120px;
   fill: $portfolio_default;
 }
+.hero__description {
+  gap: 10px;
+}
 @media screen and (max-width: 1280px) {
   .hero__icon {
     height: 100px;
     width: 100px;
   }
 }
-@media screen and (min-width: 960px) {
-  .hero {
-    min-height: 450px;
+@media screen and (max-width: 960px) {
+  .hero__description {
+    justify-content: center;
   }
 }
 @media screen and (max-width: 380px) {
   .hero__greeting {
-    font-size: 20px !important;
+    font-size: 26px !important;
   }
   .hero__chip {
     width: 100%;
+  }
+  .hero__chip__icon {
+    display: none !important;
   }
 }
 </style>
