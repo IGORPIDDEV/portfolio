@@ -26,10 +26,11 @@ import { useNavigationStore } from '@/stores/navigation'
 import listMenu from './listMenu.vue'
 import navMenu from './navMenu.vue'
 import socialLinks from './socialLinks.vue'
+import animation from '@/components/transitions/Animation.vue'
 
 export default defineComponent({
   name: 'AppHeader',
-  components: { listMenu, navMenu, socialLinks },
+  components: { listMenu, navMenu, socialLinks, animation },
   setup() {
     const store = useNavigationStore()
     const { mobile } = useDisplay()
