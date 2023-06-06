@@ -1,24 +1,39 @@
 <template>
-  <transition name="fade" apper>
+  <transition-group @enter="enter" @leave="leave" appear>
     <slot />
-  </transition>
+  </transition-group>
 </template>
 
 <script lang="ts">
+import 'animate.css'
 import { defineComponent } from 'vue'
+
 export default defineComponent({
-  name: 'Animation'
+  name: 'Animate',
+  props: {
+    enterName: {
+      type: String,
+      default: 'fadeIn'
+    },
+    leaveName: {
+      type: String,
+      default: 'fadeOut'
+    }
+  },
+  setup(props) {
+    const enter = function (el: HTMLElement, done) {
+      console.log('el', el)
+      el.classList.add('animate__animated', `animate__${props.enterName}`)
+      el.addEventListener('animationend', done)
+    }
+    const leave = function (el: HTMLElement, done) {
+      el.classList.add('animate__animated', `animate__${props.leaveName}`)
+      el.addEventListener('animationend', done)
+    }
+    return {
+      enter,
+      leave
+    }
+  }
 })
 </script>
-
-<style lang="scss">
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.5s;
-}
-
-.fade-enter,
-.fade-leave-to {
-  opacity: 0;
-}
-</style>

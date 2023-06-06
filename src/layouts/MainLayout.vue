@@ -11,7 +11,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import AppHeader from '@/components/common/header/Header.vue'
-import AppFooter from '@/components/common/Footer.vue'
+import AppFooter from '@/components/common/footer/Footer.vue'
 export default defineComponent({
   name: 'MainLayout',
   components: {
