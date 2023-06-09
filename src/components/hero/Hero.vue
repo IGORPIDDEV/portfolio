@@ -31,10 +31,12 @@
               <v-container class="pa-0">
                 <v-row>
                   <v-col cols="12" sm="6" md="6" lg="4">
-                    <v-btn :block="true" color="secondary" dark>View My Works</v-btn>
+                    <v-btn :block="true" size="x-large" color="secondary" dark>View My Works</v-btn>
                   </v-col>
                   <v-col col="12" sm="6" md="6" lg="4">
-                    <v-btn :block="true" variant="outlined" color="default" dark>Download CV</v-btn>
+                    <v-btn :block="true" size="x-large" variant="outlined" color="default" dark
+                      >Download CV</v-btn
+                    >
                   </v-col>
                 </v-row>
               </v-container>

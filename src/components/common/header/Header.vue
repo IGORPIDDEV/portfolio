@@ -1,5 +1,12 @@
 <template>
-  <v-app-bar class="header" height="80" color="primary" flat>
+  <v-app-bar
+    class="header"
+    height="80"
+    color="primary"
+    flat
+    scroll-behavior="hide elevate"
+    scroll-threshold="0"
+  >
     <v-container class="pl-2 fill-height">
       <animation enterName="fadeIn">
         <v-app-bar-title class="header__title text-no-wrap font-weight-bold">
