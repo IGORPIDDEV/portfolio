@@ -4,8 +4,9 @@ import { reactive, ref, watch } from 'vue'
 
 export const useNavigationStore = defineStore('navigation', () => {
   const mobileDrawer = ref<boolean>(false)
-  const activeLink = ref<string>('')
   const homeView = ref<HTMLElement | null>(null)
+  const activeLink = ref<number>(0)
+  const scrolled = ref<boolean>(false)
   const links = reactive<LinkInterface[]>([
     {
       title: 'Home',
@@ -60,11 +61,6 @@ export const useNavigationStore = defineStore('navigation', () => {
     }
   ])
 
-  function goTo(src: string, mobile: boolean = false) {
-    activeLink.value = src
-    if (mobile) mobileDrawer.value = false
-  }
-
   watch(
     () => activeLink.value,
     (activeLink) => {
@@ -72,14 +68,17 @@ export const useNavigationStore = defineStore('navigation', () => {
     }
   )
 
-  function scrollToActiveElement(activeLink: string) {
+  function scrollToActiveElement(activeLink: number) {
     if (homeView.value) {
-      const children = homeView.value.querySelectorAll(`[data-section="${activeLink}"]`)
+      const activeLinkElement = links[activeLink]
+      const children = homeView.value.querySelectorAll(`[data-section="${activeLinkElement.src}"]`)
       children.forEach((child) => {
-        if (child.scrollIntoView) child.scrollIntoView({ behavior: 'smooth' })
+        if (child.scrollIntoView) {
+          child.scrollIntoView({ behavior: 'smooth' })
+        }
       })
     }
   }
 
-  return { links, socialLinks, mobileDrawer, activeLink, homeView, goTo }
+  return { links, socialLinks, mobileDrawer, activeLink, homeView, scrolled, scrollToActiveElement }
 })

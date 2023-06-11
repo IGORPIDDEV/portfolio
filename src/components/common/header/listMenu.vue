@@ -3,10 +3,10 @@
     <v-list-item
       v-for="(link, index) in store.links"
       :key="index"
-      :value="link.src"
+      :value="index"
       color="primary"
-      :active="link.title === store.activeLink"
-      @click="store.goTo(link.src, true)"
+      :active="index === store.activeLink"
+      @click="store.activeLink = index"
     >
       <template v-slot:prepend>
         <v-icon class="header__icon">{{ link.icon }}</v-icon>

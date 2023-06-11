@@ -1,15 +1,19 @@
 <template>
   <v-toolbar-items class="header__nav d-none d-md-flex align-center">
-    <v-tabs class="header__nav__tabs" color="secondary" background-color="white" height="40">
+    <v-tabs
+      class="header__nav__tabs"
+      color="secondary"
+      background-color="white"
+      height="40"
+      v-model="store.activeLink"
+    >
       <v-tab
         v-for="(link, index) in store.links"
         :key="index"
         class="header__nav__tab px-1 mx-3"
         min-width="0"
         :ripple="false"
-        :active="link.title === store.activeLink"
         rounded="20px"
-        @click="store.goTo(link.src, false)"
       >
         {{ link.title }}
       </v-tab>

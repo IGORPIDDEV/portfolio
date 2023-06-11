@@ -8,7 +8,7 @@
 
 <script lang="ts">
 import { useNavigationStore } from '@/stores/navigation'
-import { defineComponent, ref, watch } from 'vue'
+import { defineComponent, onMounted, ref, watch } from 'vue'
 import Hero from '@/components/hero/Hero.vue'
 import About from '@/components/pages/home/About.vue'
 import Skills from '@/components/pages/home/Skills.vue'
@@ -27,6 +27,24 @@ export default defineComponent({
 
     watch(homeViewRef, (newValue) => {
       store.homeView = newValue
+    })
+
+    onMounted(() => {
+      // window.onscroll = () => {
+      //   if (homeViewRef.value) {
+      //     const children = homeViewRef.value.querySelectorAll(`section`)
+      //     children.forEach((child) => {
+      //       let windowTopScroll = window.scrollY
+      //       let childHeight = child.offsetHeight
+      //       let childOffset = child.offsetTop
+      //       if (windowTopScroll >= childOffset && windowTopScroll < childOffset + childHeight) {
+      //         let childSectionName = child.getAttribute('data-section')
+      //         let index = store.links.findIndex((item) => item.src === childSectionName)
+      //         if (index !== store.activeLink) store.activeLink = index
+      //       }
+      //     })
+      //   }
+      // }
     })
 
     return {
