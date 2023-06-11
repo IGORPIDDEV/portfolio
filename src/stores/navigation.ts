@@ -1,11 +1,18 @@
 import type LinkInterface from '@/types/Link'
 import { defineStore } from 'pinia'
-import { reactive, ref } from 'vue'
+import { reactive, ref, watch } from 'vue'
 
 export const useNavigationStore = defineStore('navigation', () => {
   const mobileDrawer = ref<boolean>(false)
   const activeLink = ref<string>('')
+  const homeView = ref<HTMLElement | null>(null)
   const links = reactive<LinkInterface[]>([
+    {
+      title: 'Home',
+      src: 'home',
+      icon: 'mdi-home-account',
+      type: 'default'
+    },
     {
       title: 'About',
       src: 'about',
@@ -53,10 +60,26 @@ export const useNavigationStore = defineStore('navigation', () => {
     }
   ])
 
-  function goTo(title: string, mobile: boolean = false) {
-    activeLink.value = title
+  function goTo(src: string, mobile: boolean = false) {
+    activeLink.value = src
     if (mobile) mobileDrawer.value = false
   }
 
-  return { links, socialLinks, mobileDrawer, activeLink, goTo }
+  watch(
+    () => activeLink.value,
+    (activeLink) => {
+      scrollToActiveElement(activeLink)
+    }
+  )
+
+  function scrollToActiveElement(activeLink: string) {
+    if (homeView.value) {
+      const children = homeView.value.querySelectorAll(`[data-section="${activeLink}"]`)
+      children.forEach((child) => {
+        if (child.scrollIntoView) child.scrollIntoView({ behavior: 'smooth' })
+      })
+    }
+  }
+
+  return { links, socialLinks, mobileDrawer, activeLink, homeView, goTo }
 })

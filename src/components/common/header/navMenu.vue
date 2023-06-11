@@ -9,7 +9,7 @@
         :ripple="false"
         :active="link.title === store.activeLink"
         rounded="20px"
-        @click="store.goTo(link.title, false)"
+        @click="store.goTo(link.src, false)"
       >
         {{ link.title }}
       </v-tab>

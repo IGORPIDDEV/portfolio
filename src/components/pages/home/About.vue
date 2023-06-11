@@ -1,5 +1,5 @@
 <template>
-  <section class="about">
+  <section class="about" data-section="about">
     <v-container class="pa-0 full-height d-flex flex-column align-center justify-center">
       <h1 class="text-h1 my-4">About me</h1>
       <p class="text-h5 my-4 text-justify">
@@ -16,7 +16,11 @@
 </template>
 
 <script lang="ts">
-export default {}
+import { defineComponent } from 'vue'
+
+export default defineComponent({
+  name: 'HomeAbout'
+})
 </script>
 
 <style lang="scss">

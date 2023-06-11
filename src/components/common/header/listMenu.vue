@@ -4,9 +4,9 @@
       v-for="(link, index) in store.links"
       :key="index"
       :value="link.src"
-      active-color="primary"
+      color="primary"
       :active="link.title === store.activeLink"
-      @click="store.goTo(link.title, true)"
+      @click="store.goTo(link.src, true)"
     >
       <template v-slot:prepend>
         <v-icon class="header__icon">{{ link.icon }}</v-icon>

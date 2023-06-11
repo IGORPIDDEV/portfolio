@@ -22,7 +22,6 @@ export default defineComponent({
   },
   setup(props) {
     const enter = function (el: HTMLElement, done) {
-      console.log('el', el)
       el.classList.add('animate__animated', `animate__${props.enterName}`)
       el.addEventListener('animationend', done)
     }

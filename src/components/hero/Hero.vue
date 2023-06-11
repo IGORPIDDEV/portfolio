@@ -1,5 +1,5 @@
 <template>
-  <section class="hero">
+  <section class="hero" data-section="home">
     <v-container fluid class="pa-0 full-height">
       <div class="hero px-6 d-flex align-center full-height">
         <v-container class="hero__container">
@@ -84,7 +84,7 @@ import IconFrontend from './IconFrontend.vue'
 import IconDatabase from './IconDatabase.vue'
 import IconAlgorithm from './IconAlgorithm.vue'
 export default defineComponent({
-  name: 'Hero',
+  name: 'HomeHero',
   components: { IconBackend, IconFrontend, IconDatabase, IconAlgorithm },
   setup() {
     const { mobile } = useDisplay()
