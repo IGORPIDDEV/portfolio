@@ -30,21 +30,23 @@ export default defineComponent({
     })
 
     onMounted(() => {
-      // window.onscroll = () => {
-      //   if (homeViewRef.value) {
-      //     const children = homeViewRef.value.querySelectorAll(`section`)
-      //     children.forEach((child) => {
-      //       let windowTopScroll = window.scrollY
-      //       let childHeight = child.offsetHeight
-      //       let childOffset = child.offsetTop
-      //       if (windowTopScroll >= childOffset && windowTopScroll < childOffset + childHeight) {
-      //         let childSectionName = child.getAttribute('data-section')
-      //         let index = store.links.findIndex((item) => item.src === childSectionName)
-      //         if (index !== store.activeLink) store.activeLink = index
-      //       }
-      //     })
-      //   }
-      // }
+      window.onscroll = () => {
+        if (!store.isAutoScrolling) {
+          if (homeViewRef.value) {
+            const children = homeViewRef.value.querySelectorAll(`section`)
+            children.forEach((child) => {
+              let windowTopScroll = window.scrollY
+              let childHeight = child.offsetHeight
+              let childOffset = child.offsetTop
+              if (windowTopScroll >= childOffset && windowTopScroll < childOffset + childHeight) {
+                let childSectionName = child.getAttribute('data-section')
+                let index = store.links.findIndex((item) => item.src === childSectionName)
+                if (index !== store.activeLink) store.activeLink = index
+              }
+            })
+          }
+        }
+      }
     })
 
     return {
