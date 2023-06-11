@@ -25,6 +25,7 @@ export default defineComponent({
 
 <style lang="scss">
 .about {
-  color: $portfolio_primary;
+  color: $portfolio_primary !important;
+  background-color: $portfolio_default;
 }
 </style>

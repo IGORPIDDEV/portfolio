@@ -6,7 +6,6 @@ export const useNavigationStore = defineStore('navigation', () => {
   const mobileDrawer = ref<boolean>(false)
   const homeView = ref<HTMLElement | null>(null)
   const activeLink = ref<number>(0)
-  const isAutoScrolling = ref<boolean>(false)
   const links = reactive<LinkInterface[]>([
     {
       title: 'Home',
@@ -20,12 +19,12 @@ export const useNavigationStore = defineStore('navigation', () => {
       icon: 'mdi-chat-question-outline',
       type: 'default'
     },
-    {
-      title: 'Skills',
-      src: 'skills',
-      icon: 'mdi-application-braces-outline',
-      type: 'default'
-    },
+    // {
+    //   title: 'Skills',
+    //   src: 'skills',
+    //   icon: 'mdi-application-braces-outline',
+    //   type: 'default'
+    // },
     {
       title: 'Projects',
       src: 'projects',
@@ -70,16 +69,12 @@ export const useNavigationStore = defineStore('navigation', () => {
 
   function scrollToActiveElement(activeLink: number) {
     if (homeView.value) {
-      isAutoScrolling.value = true
       const activeLinkElement = links[activeLink]
       const children = homeView.value.querySelectorAll(`[data-section="${activeLinkElement.src}"]`)
       children.forEach((child) => {
         if (child.scrollIntoView) {
           child.scrollIntoView({ behavior: 'smooth' })
         }
-        setTimeout(() => {
-          isAutoScrolling.value = false
-        }, 600)
       })
     }
   }
@@ -90,7 +85,6 @@ export const useNavigationStore = defineStore('navigation', () => {
     mobileDrawer,
     activeLink,
     homeView,
-    isAutoScrolling,
     scrollToActiveElement
   }
 })

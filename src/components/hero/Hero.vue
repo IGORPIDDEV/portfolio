@@ -1,7 +1,7 @@
 <template>
   <section class="hero" data-section="home">
     <v-container fluid class="pa-0 full-height">
-      <div class="hero px-6 d-flex align-center full-height">
+      <div class="px-6 d-flex align-center full-height">
         <v-container class="hero__container">
           <v-row>
             <v-col cols="12" md="6" lg="7" class="text-center text-md-left px-0">

@@ -2,7 +2,9 @@
   <div class="home" ref="homeViewRef">
     <hero />
     <about />
-    <skills />
+    <!-- <skills /> -->
+    <projects />
+    <contacts />
   </div>
 </template>
 
@@ -11,13 +13,17 @@ import { useNavigationStore } from '@/stores/navigation'
 import { defineComponent, onMounted, ref, watch } from 'vue'
 import Hero from '@/components/hero/Hero.vue'
 import About from '@/components/pages/home/About.vue'
-import Skills from '@/components/pages/home/Skills.vue'
+// import Skills from '@/components/pages/home/Skills.vue'
+import Projects from '@/components/pages/home/Projects.vue'
+import Contacts from '@/components/pages/home/Contacts.vue'
 export default defineComponent({
   name: 'HomeView',
   components: {
     Hero,
     About,
-    Skills
+    // Skills,
+    Projects,
+    Contacts
   },
   setup() {
     const store = useNavigationStore()
@@ -30,23 +36,30 @@ export default defineComponent({
     })
 
     onMounted(() => {
-      window.onscroll = () => {
-        if (!store.isAutoScrolling) {
-          if (homeViewRef.value) {
-            const children = homeViewRef.value.querySelectorAll(`section`)
-            children.forEach((child) => {
-              let windowTopScroll = window.scrollY
-              let childHeight = child.offsetHeight
-              let childOffset = child.offsetTop
-              if (windowTopScroll >= childOffset && windowTopScroll < childOffset + childHeight) {
-                let childSectionName = child.getAttribute('data-section')
-                let index = store.links.findIndex((item) => item.src === childSectionName)
-                if (index !== store.activeLink) store.activeLink = index
+      window.addEventListener('wheel', () => {
+        if (homeViewRef.value) {
+          const children = homeViewRef.value.querySelectorAll('section')
+          const windowTopScroll = window.scrollY
+
+          for (let i = 0; i < children.length; i++) {
+            const child = children[i]
+            const childHeight = child.offsetHeight
+            const childOffset = child.offsetTop
+
+            if (
+              windowTopScroll >= childOffset - 80 &&
+              windowTopScroll < childOffset + childHeight
+            ) {
+              const childSectionName = child.getAttribute('data-section')
+              const index = store.links.findIndex((item) => item.src === childSectionName)
+
+              if (index !== store.activeLink) {
+                store.activeLink = index
               }
-            })
+            }
           }
         }
-      }
+      })
     })
 
     return {
