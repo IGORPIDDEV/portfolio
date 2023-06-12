@@ -19,12 +19,12 @@ export const useNavigationStore = defineStore('navigation', () => {
       icon: 'mdi-chat-question-outline',
       type: 'default'
     },
-    // {
-    //   title: 'Skills',
-    //   src: 'skills',
-    //   icon: 'mdi-application-braces-outline',
-    //   type: 'default'
-    // },
+    {
+      title: 'Technologies',
+      src: 'technologies',
+      icon: 'mdi-application-braces-outline',
+      type: 'default'
+    },
     {
       title: 'Projects',
       src: 'projects',
@@ -67,6 +67,28 @@ export const useNavigationStore = defineStore('navigation', () => {
     }
   )
 
+  function setActiveElementByWheel() {
+    if (homeView.value) {
+      const children = homeView.value.querySelectorAll('section')
+      const windowTopScroll = window.scrollY
+
+      for (let i = 0; i < children.length; i++) {
+        const child = children[i]
+        const childHeight = child.offsetHeight
+        const childOffset = child.offsetTop
+
+        if (windowTopScroll >= childOffset - 80 && windowTopScroll < childOffset + childHeight) {
+          const childSectionName = child.getAttribute('data-section')
+          const index = links.findIndex((item) => item.src === childSectionName)
+
+          if (index !== activeLink.value) {
+            activeLink.value = index
+          }
+        }
+      }
+    }
+  }
+
   function scrollToActiveElement(activeLink: number) {
     if (homeView.value) {
       const activeLinkElement = links[activeLink]
@@ -79,12 +101,19 @@ export const useNavigationStore = defineStore('navigation', () => {
     }
   }
 
+  function goTo(src: string) {
+    const linkIndex = links.findIndex((item) => item.src === src)
+    if (linkIndex >= 0) activeLink.value = linkIndex
+  }
+
   return {
     links,
     socialLinks,
     mobileDrawer,
     activeLink,
     homeView,
-    scrollToActiveElement
+    scrollToActiveElement,
+    setActiveElementByWheel,
+    goTo
   }
 })
