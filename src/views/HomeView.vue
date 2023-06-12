@@ -37,7 +37,7 @@ export default defineComponent({
 
     onMounted(() => {
       window.addEventListener('wheel', () => {
-        store.setActiveElementByWheel()
+        store.setActiveSection()
       })
     })
 
@@ -47,9 +47,4 @@ export default defineComponent({
   }
 })
 </script>
-<style lang="scss">
-.sticky {
-  position: sticky;
-  top: 0;
-}
-</style>
+<style lang="scss"></style>

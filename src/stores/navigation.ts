@@ -66,8 +66,14 @@ export const useNavigationStore = defineStore('navigation', () => {
       scrollToActiveElement(activeLink)
     }
   )
+  watch(
+    () => homeView.value,
+    () => {
+      setActiveSection()
+    }
+  )
 
-  function setActiveElementByWheel() {
+  function setActiveSection() {
     if (homeView.value) {
       const children = homeView.value.querySelectorAll('section')
       const windowTopScroll = window.scrollY
@@ -113,7 +119,7 @@ export const useNavigationStore = defineStore('navigation', () => {
     activeLink,
     homeView,
     scrollToActiveElement,
-    setActiveElementByWheel,
+    setActiveSection,
     goTo
   }
 })
